@@ -54,27 +54,27 @@ public class Stack_PA
      *                 original stack ==> [4, 6, 7, 4, 2, 7]
      *                 final stack ==> [4, 6, 7, 2]
      */
-    public static int removeDuplicates(Stack<Integer> stack)
-    {   int count = 0;
-        Stack<Integer> temp = new Stack<Integer>();
-        while(!stack.isEmpty())
-        {
-            int i = stack.pop();
-            if(!stack.contains(i))
-            {
-                temp.push(i);
+    public static int removeDuplicates(Stack<Integer> stack) {
+        int count = 0;
+        Stack<Integer> temp = new Stack<>();
+    
+        while (!stack.isEmpty()) {
+            int num = stack.pop();
+    
+            if (!temp.contains(num)) {
+                temp.push(num);
                 count++;
-
             }
         }
-        while(!temp.isEmpty())
-        {
-           stack.push(temp.pop());
+    
+        // Restore the original order in the original stack
+        while (!temp.isEmpty()) {
+            stack.push(temp.pop());
         }
-
-
+    
         return count;
     }
+    
 
     /* @param stack - is a stack of Integer values
      * @param element - value of the element to be removed
@@ -84,10 +84,24 @@ public class Stack_PA
      * postcondition - Removes the first occurrence of a specific element from a stack, leaving 
      *                 the other elements in the stack in the same relative order
      */
-    public static void removeFirstOccurrence(Stack<Integer> stack, int element)
-    {
-
+    public static void removeFirstOccurrence(Stack<Integer> stack, int element) {
+        int count = 0;
+        Stack<Integer> temp = new Stack<>();
+    
+        while (!stack.isEmpty()) {
+            int num = stack.pop();
+            if (count == 0 && num == element) {
+                count++;
+            } else {
+                temp.push(num);
+            }
+        }
+    
+        while (!temp.isEmpty()) {
+            stack.push(temp.pop());
+        }
     }
+    
 
     /* @param stack - is a stack of String values
      * @param element - value of the element to be removed
@@ -97,9 +111,19 @@ public class Stack_PA
      * postcondition - Removes all occurrances of a specific element from a stack, leaving 
      *                 the other elements in the stack in the same relative order
      */
-    public static void removeAllOccurrences(Stack<String> stack, String element)
-    {
+    public static void removeAllOccurrences(Stack<String> stack, String element) {
+        Stack<String> temp = new Stack<>();
 
+        while (!stack.isEmpty()) {
+            String str = stack.pop();
+            if (!str.equals(element)) {
+                temp.push(str);
+            }
+        }
+
+        while (!temp.isEmpty()) {
+            stack.push(temp.pop());
+        }
     }
 
     /****************** Testing **********************************/
